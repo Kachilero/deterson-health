@@ -16,9 +16,13 @@ export class DoctorListItem extends React.Component {
             <h2>Susan M. Smith, MD</h2>
             <h3>Woman's Health Dermatology</h3>
           </div>
+        </div>
+        <div className='doctor-card--info-container'>
           <div className='doctor-card--info'>
             <h3 className='location'>Arbor Creek</h3>
             <p className='distance'>3 miles</p>
+          </div>
+          <div className='doctor-card--info'>
             <h3 className='location'>Olathe Health Family Medicine - Paola</h3>
             <p className='distance'>10 miles</p>
           </div>

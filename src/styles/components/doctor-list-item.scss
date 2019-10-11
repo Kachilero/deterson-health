@@ -1,0 +1,56 @@
+// Styles for each doctor card
+.doctor-card {
+  //background-color: lightblue;
+  border-bottom: 2px solid rgba(0,0,100, 0.1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding-bottom: 10px;
+  width: 100%;
+
+  &--image {
+    width: 20%;
+
+    img {
+      max-width: 100%;
+    }
+  }
+  &--body {
+    width: 40%;
+  }
+
+  &--name {
+    h2 {
+      padding-top: 10px;
+      color: $font-blue;
+      line-height: 0;
+    }
+    h3 {
+      color: #000;
+      font-weight: lighter;
+    }
+
+  }
+
+  &--info-container { width: 35%; }
+
+  &--info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    .location {
+      font-weight: lighter;
+      //margin-block-end: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .distance {
+      //margin-block-start: 0;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

@@ -8,6 +8,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  margin-bottom: 5rem;
 }
 
 code {
@@ -21,9 +23,11 @@ h3 {
 }
 
 @import "App";
-@import "header";
-@import "hero";
-@import "zip-code-filter";
-@import "main-row";
-@import "slider";
-@import "gender-filter";
+@import "components/header";
+@import "components/hero";
+@import "components/zip-code-filter";
+@import "components/main-row";
+@import "components/slider";
+@import "components/gender-filter";
+@import "components/doctor-list";
+@import "components/doctor-list-item";
