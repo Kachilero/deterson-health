@@ -1,0 +1,16 @@
+// Slider
+.slider {
+  .rangeslider-horizontal {
+    .rangeslider__handle {
+      width: 10px;
+      height: 30px;
+      border: none;
+      border-radius: 0;
+      background: lighten($font-blue, 10);
+      box-shadow: none;
+      &:after {
+        display: none;
+      }
+    }
+  }
+}

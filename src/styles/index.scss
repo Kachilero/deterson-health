@@ -1,4 +1,6 @@
 // Use this file as the main import
+@import "color-and-variables";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Cabin', 'Roboto', 'Oxygen',
@@ -13,6 +15,15 @@ code {
     monospace;
 }
 
+h3 {
+  font-size: 1.2rem;
+  color: $font-blue;
+}
+
 @import "App";
 @import "header";
 @import "hero";
+@import "zip-code-filter";
+@import "main-row";
+@import "slider";
+@import "gender-filter";

@@ -1,0 +1,49 @@
+// Zip
+.zip-container {
+  background-color: $gray1;
+  margin: 10px auto;
+  padding: 20px;
+  max-width: 100%;
+
+  .input-group {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    &--item {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+
+      label {
+        color: #696969;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      input[type='text'] {
+        height: 25px;
+        padding: 5px;
+        border: 2px solid #CCC;
+        border-radius: 5px;
+
+        &:focus {
+          border-color: #333;
+        }
+      }
+    }
+
+    button {
+      background-color: $button-green;
+      border: 0 none;
+      border-radius: 5px;
+      color: #FFF;
+      cursor: pointer;
+      font-size: 1.4rem;
+      max-height: 50px;
+      padding: 10px 50px;
+    }
+  }
+}

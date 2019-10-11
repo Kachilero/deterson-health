@@ -17,12 +17,10 @@ const App: React.FC = () => {
         <ZipCodeFilter/>
         <div className='row'>
           <div className='left'>
-            <h2>LEFT</h2>
             <DistanceFilter/>
             <GenderFilter/>
           </div>
           <div className='right'>
-            <h2>RIGHT</h2>
             <DoctorList/>
           </div>
         </div>
