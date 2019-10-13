@@ -25,7 +25,7 @@ export class ZipCodeFilter extends React.Component<ZipCodeFilterProps, ZipCodeFi
     let isValidZip = /^[0-9]*$/gm.test(zCode);
     // Check to make sure we have only numbers and there are less than 5
     // before updating the input value
-    if (isValidZip && this.state.zipCode.length <= 4) {
+    if (isValidZip && ( this.state.zipCode !== null && this.state.zipCode.length <= 4)) {
       this.setState({
         zipCode: e.target.value
       })
@@ -33,9 +33,10 @@ export class ZipCodeFilter extends React.Component<ZipCodeFilterProps, ZipCodeFi
   };
 
   onButtonClick = () => {
-    console.log('Button was clicked');
     const zCode = this.state.zipCode;
-    if (zCode.length !== 5) {
+    if (zCode === null) {
+      alert("Zip Code is NULL")
+    } else if ( zCode.length !== 5 ) {
       alert("Zip Code must be 5 numbers long")
     }
     const zNumber = Number(zCode);
@@ -79,10 +80,4 @@ const mapStateToProps = (state: any) => ({
   ...state
 });
 
-// const mapDispatchToProps = (dispatch: Dispatch) => {
-//   return {
-//     onZipCodeSearch: (distance: number | null) => dispatch(zipCodeSearch(distance))
-//   }
-// };
-// @ts-ignore
 export default connect(mapStateToProps, undefined)(ZipCodeFilter);

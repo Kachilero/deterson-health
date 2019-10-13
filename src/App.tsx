@@ -11,17 +11,33 @@ import DoctorList from "./components/DoctorList";
 // actions
 import { zipCodeSearch } from "./actions/ZipCodeAction";
 
+type AppState = {
+  zipCode: number | null
+}
+
 type AppProps = {
   onZipCodeSearch: (distance: number) => void
 }
 
-export class App extends React.Component<AppProps> {
+const getInitialState: AppState = {
+  zipCode: null
+};
+
+export class App extends React.Component<AppProps, AppState> {
+  readonly state = getInitialState;
   onZipCodeClick = (distance: number) => {
     console.log(`Zip Clicked => ${distance}`);
+    this.setState({
+      zipCode: distance
+    });
     this.props.onZipCodeSearch(distance);
   };
 
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
+    console.log("APP STATE: ");
+    console.log(this.state);
+    console.log("APP PROPS: ");
+    console.log(this.props);
     return (
       <div className="App">
         <Header/>
@@ -40,12 +56,25 @@ export class App extends React.Component<AppProps> {
               <GenderFilter/>
             </div>
             <div className='right'>
-              <DoctorList/>
+              {this.state.zipCode === null
+                ? <div>
+                    <h3>Please enter a zip code in the field above</h3>
+                  </div>
+                : <DoctorList/>
+              }
             </div>
           </div>
         </div>
       </div>
     );
+  }
+}
+
+function mapStateToProps(state: AppState) {
+  console.log("Map State");
+  console.log(state);
+  return {
+    zipCode: state.zipCode
   }
 }
 
@@ -55,4 +84,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 };
 
-export default connect(undefined, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

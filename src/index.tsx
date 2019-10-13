@@ -8,7 +8,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
-
+console.log("Store");
+console.log(store);
 const jsx = (
   <Provider store={store}>
     <App />

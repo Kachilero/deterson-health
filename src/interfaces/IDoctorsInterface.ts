@@ -26,5 +26,5 @@ export interface IDoctorsInterface {
 }
 
 export interface IDoctorsResults {
-  results: IDoctorsInterface[]
+  results: IDoctorsInterface[] | null
 }
