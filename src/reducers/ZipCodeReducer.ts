@@ -21,6 +21,12 @@ export default function (
       // @ts-ignore
       state.results[i] = Doctors.results[i]
     }
+    state.results.sort((a,b) => {
+      // We're going to ignore TS here because it's keeps warning
+      // that the Object could be null, but it actually can't
+      //@ts-ignore
+      return a.locations[0].distance > b.locations[0].distance ? 1 : -1;
+    });
     return {
       ...state
     };

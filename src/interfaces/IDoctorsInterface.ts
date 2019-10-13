@@ -9,7 +9,7 @@ export interface IDoctorsInterface {
   languages?: string[] | undefined
   url: string
   image: string
-  gender: "Male" | "Female"
+  gender: "Male" | "Female" | "default"
   bio?: string
   locations: {
     name: string

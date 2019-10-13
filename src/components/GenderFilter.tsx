@@ -3,7 +3,9 @@
  */
 import React from "react";
 
-type GenderFilterProps = {}
+type GenderFilterProps = {
+  onGenderSelection: (gender: "Male" | "Female" | "default") => void
+}
 type GenderFilterState = {
   selectedOption: string
 }
@@ -18,8 +20,13 @@ export class GenderFilter extends React.Component<GenderFilterProps> {
   readonly state = getInitialState(this.props);
 
   handleOptionsChange = (changeEvent: React.ChangeEvent<HTMLInputElement>) => {
+    const eventValue = changeEvent.target.value;
+    // We'll ignore the next line because it's trying to type it to a string
+    // even though the string is the literal we're looking for
+    //@ts-ignore
+    this.props.onGenderSelection(eventValue);
     this.setState({
-      selectedOption: changeEvent.target.value
+      selectedOption: eventValue
     });
   };
 
@@ -33,8 +40,8 @@ export class GenderFilter extends React.Component<GenderFilterProps> {
               <input
                 type="radio"
                 name="gender"
-                value="male"
-                checked={this.state.selectedOption === "male"}
+                value="Male"
+                checked={this.state.selectedOption === "Male"}
                 onChange={e => this.handleOptionsChange(e)}
                 className="input-group--item"
               />
@@ -44,8 +51,8 @@ export class GenderFilter extends React.Component<GenderFilterProps> {
               <input
                 type="radio"
                 name="gender"
-                value="female"
-                checked={this.state.selectedOption === "female"}
+                value="Female"
+                checked={this.state.selectedOption === "Female"}
                 onChange={e => this.handleOptionsChange(e)}
                 className="input-group--item"
               />

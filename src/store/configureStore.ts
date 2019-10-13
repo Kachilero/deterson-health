@@ -5,11 +5,15 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 // Reducers
 import ZipCodeReducer from "../reducers/ZipCodeReducer";
-// import {zipCodeSearch} from "../actions/ZipCodeAction";
+import FilterReducer from "../reducers/FilterReducer";
+
+import {zipCodeSearch} from "../actions/ZipCodeAction";
+import { distanceFilter, genderFilter } from "../actions/FilterActions";
 
 function createRootReducer() {
   return combineReducers({
-    zipCodeReducer: ZipCodeReducer
+    zipCodeReducer: ZipCodeReducer,
+    filterReducer: FilterReducer
   })
 }
 const rootReducer = createRootReducer();
@@ -21,7 +25,9 @@ const configureStore = (initialState?: any) => {
   middleware.push(thunk);
 
   const actionCreators = {
-    ZipCodeReducer
+    zipCodeSearch,
+    distanceFilter,
+    genderFilter
   };
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle */

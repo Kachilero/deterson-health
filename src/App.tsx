@@ -10,6 +10,7 @@ import GenderFilter from "./components/GenderFilter";
 import DoctorList from "./components/DoctorList";
 // actions
 import { zipCodeSearch } from "./actions/ZipCodeAction";
+import { distanceFilter, genderFilter } from "./actions/FilterActions";
 
 type AppState = {
   zipCode: number | null
@@ -20,6 +21,8 @@ type AppState = {
 
 type AppProps = {
   onZipCodeSearch: (distance: number) => void
+  onDistanceFilter: (distance: number) => void
+  onGenderFilter: (gender: "Male" | "Female" | "default", results: any) => {}
   zipCodeReducer: {
     results: {}[] | null
   }
@@ -36,6 +39,7 @@ const getInitialState = (props: AppProps): AppState => {
 
 export class App extends React.Component<AppProps, AppState> {
   readonly state = getInitialState(this.props);
+
   onZipCodeClick = (distance: number) => {
     this.props.onZipCodeSearch(distance);
     this.setState({
@@ -44,6 +48,16 @@ export class App extends React.Component<AppProps, AppState> {
         results: this.props.zipCodeReducer.results
       }
     });
+  };
+
+  onGenderSelection = (gender: "Male" | "Female" | "default") => {
+    const results = this.props.zipCodeReducer.results;
+    const filteredByGender: any = this.props.onGenderFilter(gender, results);
+    this.setState({
+      zipCodeReducer: {
+        results: filteredByGender.results
+      }
+    })
   };
 
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
@@ -66,7 +80,11 @@ export class App extends React.Component<AppProps, AppState> {
           <div className='row'>
             <div className='left'>
               <DistanceFilter/>
-              <GenderFilter/>
+              <GenderFilter
+                onGenderSelection={(gender) => {
+                  this.onGenderSelection(gender);
+                }}
+              />
             </div>
             <div className='right'>
               {this.state.zipCode === null
@@ -75,7 +93,7 @@ export class App extends React.Component<AppProps, AppState> {
                   </div>
                 : <DoctorList
                   //@ts-ignore
-                    results={this.props.zipCodeReducer.results}
+                    results={this.state.zipCodeReducer.results}
                   />
               }
             </div>
@@ -99,7 +117,9 @@ function mapStateToProps(state: AppState) {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onZipCodeSearch: (distance: number | null) => dispatch(zipCodeSearch(distance))
+    onZipCodeSearch: (distance: number | null) => dispatch(zipCodeSearch(distance)),
+    onDistanceFilter: (distance: number) => dispatch(distanceFilter(distance)),
+    onGenderFilter: (gender: "Male" | "Female" | "default", results: any) => dispatch(genderFilter(gender, results))
   }
 };
 
