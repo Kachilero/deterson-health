@@ -5,7 +5,9 @@ import React from "react";
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
-type DistanceProps = {}
+type DistanceProps = {
+  onDistanceSelection: (distance: number) => void
+}
 
 type DistanceState = {
   distance: number
@@ -26,6 +28,10 @@ export class DistanceFilter extends React.Component<DistanceProps> {
     })
   };
 
+  handleChangeComplete = () => {
+    this.props.onDistanceSelection(this.state.distance);
+  };
+
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
     let { distance } = this.state;
 
@@ -35,6 +41,7 @@ export class DistanceFilter extends React.Component<DistanceProps> {
         <Slider
           value={distance}
           onChange={this.handleOnChange}
+          onChangeComplete={this.handleChangeComplete}
           min={5}
           max={30}
           step={5}

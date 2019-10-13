@@ -8,6 +8,7 @@ export enum FilterActionKeys {
 
 interface IDistanceFilterAction {
   distance: number,
+  results: any,
   type: FilterActionKeys.DISTANCE
 }
 
@@ -19,9 +20,10 @@ interface IGenderFilterAction {
 
 export type FilterActionTypes = IDistanceFilterAction | IGenderFilterAction;
 
-export function distanceFilter(distance: number = 0) {
+export function distanceFilter(distance: number = 0, results: any = {}) {
   return {
     type: FilterActionKeys.DISTANCE,
+    results,
     distance
   };
 }

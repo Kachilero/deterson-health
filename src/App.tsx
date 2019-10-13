@@ -21,7 +21,7 @@ type AppState = {
 
 type AppProps = {
   onZipCodeSearch: (distance: number) => void
-  onDistanceFilter: (distance: number) => void
+  onDistanceFilter: (distance: number, results: any) => {}
   onGenderFilter: (gender: "Male" | "Female" | "default", results: any) => {}
   zipCodeReducer: {
     results: {}[] | null
@@ -60,6 +60,18 @@ export class App extends React.Component<AppProps, AppState> {
     })
   };
 
+  onDistanceSelection = (distance: number) => {
+    console.log(`Distance filter: ${distance}`);
+    const results = this.props.zipCodeReducer.results;
+    const filteredByDistance: any = this.props.onDistanceFilter(distance, results);
+    console.log(filteredByDistance);
+    this.setState({
+      zipCodeReducer: {
+        results: filteredByDistance.results
+      }
+    })
+  };
+
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
     // console.log("APP STATE: ");
     // console.log(this.state);
@@ -79,7 +91,11 @@ export class App extends React.Component<AppProps, AppState> {
           />
           <div className='row'>
             <div className='left'>
-              <DistanceFilter/>
+              <DistanceFilter
+                onDistanceSelection = {(distance) => {
+                  this.onDistanceSelection(distance);
+                }}
+              />
               <GenderFilter
                 onGenderSelection={(gender) => {
                   this.onGenderSelection(gender);
@@ -118,7 +134,7 @@ function mapStateToProps(state: AppState) {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onZipCodeSearch: (distance: number | null) => dispatch(zipCodeSearch(distance)),
-    onDistanceFilter: (distance: number) => dispatch(distanceFilter(distance)),
+    onDistanceFilter: (distance: number, results: any) => dispatch(distanceFilter(distance, results)),
     onGenderFilter: (gender: "Male" | "Female" | "default", results: any) => dispatch(genderFilter(gender, results))
   }
 };
