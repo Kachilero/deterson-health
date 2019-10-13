@@ -38,6 +38,7 @@ export class ZipCodeFilter extends React.Component<ZipCodeFilterProps, ZipCodeFi
       alert("Zip Code is NULL")
     } else if ( zCode.length !== 5 ) {
       alert("Zip Code must be 5 numbers long")
+      return;
     }
     const zNumber = Number(zCode);
     this.props.onZipCodeSearch(zNumber);

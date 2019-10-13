@@ -13,31 +13,44 @@ import { zipCodeSearch } from "./actions/ZipCodeAction";
 
 type AppState = {
   zipCode: number | null
+  zipCodeReducer: {
+    results: {}[] | null
+  }
 }
 
 type AppProps = {
   onZipCodeSearch: (distance: number) => void
+  zipCodeReducer: {
+    results: {}[] | null
+  }
 }
 
-const getInitialState: AppState = {
-  zipCode: null
+const getInitialState = (props: AppProps): AppState => {
+  return {
+    zipCode: null,
+    zipCodeReducer: {
+      results: props.zipCodeReducer.results
+    }
+  }
 };
 
 export class App extends React.Component<AppProps, AppState> {
-  readonly state = getInitialState;
+  readonly state = getInitialState(this.props);
   onZipCodeClick = (distance: number) => {
-    console.log(`Zip Clicked => ${distance}`);
-    this.setState({
-      zipCode: distance
-    });
     this.props.onZipCodeSearch(distance);
+    this.setState({
+      zipCode: distance,
+      zipCodeReducer: {
+        results: this.props.zipCodeReducer.results
+      }
+    });
   };
 
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-    console.log("APP STATE: ");
-    console.log(this.state);
-    console.log("APP PROPS: ");
-    console.log(this.props);
+    // console.log("APP STATE: ");
+    // console.log(this.state);
+    // console.log("APP PROPS: ");
+    // console.log(this.props);
     return (
       <div className="App">
         <Header/>
@@ -60,7 +73,9 @@ export class App extends React.Component<AppProps, AppState> {
                 ? <div>
                     <h3>Please enter a zip code in the field above</h3>
                   </div>
-                : <DoctorList/>
+                : <DoctorList
+                    results={this.props.zipCodeReducer.results}
+                  />
               }
             </div>
           </div>
@@ -71,10 +86,13 @@ export class App extends React.Component<AppProps, AppState> {
 }
 
 function mapStateToProps(state: AppState) {
-  console.log("Map State");
-  console.log(state);
+  // console.log("Map State in APP");
+  // console.log(state);
   return {
-    zipCode: state.zipCode
+    zipCodeReducer: {
+      results: state.zipCodeReducer.results
+    },
+    ...state
   }
 }
 

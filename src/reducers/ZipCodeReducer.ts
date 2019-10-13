@@ -14,17 +14,17 @@ export default function (
   state = ZipCodeSearchInitState,
   action: ZipCodeActionTypes)
 {
-  console.log('Zip Reducer');
-  console.log(typeof Doctors);
-  console.log(Doctors.results);
   if (action.type === ZipCodeActionKeys.ZIP_CODE_SEARCH) {
     console.log('ZIP_CODE_SEARCH');
+    if ( state.results === null ) { state.results = [] }
+    for (let i = 0; i < Doctors.results.length; i++) {
+      // @ts-ignore
+      state.results[i] = Doctors.results[i]
+    }
     return {
-      results: Doctors.results,
-        ...state
+      ...state
     };
   } else {
-    console.log('DEFAULT');
     return { ...state }
   }
 }

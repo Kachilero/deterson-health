@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
 console.log("Store");
-console.log(store);
+console.log(store.getState());
 const jsx = (
   <Provider store={store}>
     <App />
