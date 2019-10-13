@@ -46,6 +46,7 @@ export class App extends React.Component<AppProps, AppState> {
 
   onZipCodeClick = (distance: number) => {
     this.props.onZipCodeSearch(distance);
+    // this.props.onDistanceFilter(distance, this.props.zipCodeReducer.results);
     this.setState({
       zipCode: distance,
       zipCodeReducer: {
@@ -105,6 +106,7 @@ export class App extends React.Component<AppProps, AppState> {
           <div className='row'>
             <div className='left'>
               <DistanceFilter
+                zipCode={this.state.zipCode}
                 onDistanceSelection = {(distance) => {
                   this.onDistanceSelection(distance);
                 }}

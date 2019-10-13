@@ -29,8 +29,8 @@ export class DoctorListItem extends React.Component<DoctorListItemProps, DoctorL
         </div>
         <div className='doctor-card--body'>
           <div className='doctor-card--name'>
-            <h2>{doctor.fullName}</h2>
-            {doctor.specialties.map((prop, key) => {
+            <h2><a href={doctor.url}>{doctor.fullName}</a></h2>
+            {doctor.specialties.sort().map((prop, key) => {
               return (<h3 key={key}>{prop}</h3>)
             })}
           </div>
@@ -40,7 +40,7 @@ export class DoctorListItem extends React.Component<DoctorListItemProps, DoctorL
             {doctor.locations.map((prop,key) => {
               return (
                 <div key={key}>
-                  <h3 className='location'>{prop.name}</h3>
+                  <h3 className='location'><a href={prop.url} target='_blank' rel="noopener noreferrer">{prop.name}</a></h3>
                   <p className='distance'>{ this.outputDistance(prop.distance) }</p>
                 </div>
               )
