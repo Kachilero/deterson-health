@@ -14,6 +14,8 @@ import { distanceFilter, genderFilter } from "./actions/FilterActions";
 
 type AppState = {
   zipCode: number | null
+  distance: number
+  gender: string
   zipCodeReducer: {
     results: {}[] | null
   }
@@ -31,6 +33,8 @@ type AppProps = {
 const getInitialState = (props: AppProps): AppState => {
   return {
     zipCode: null,
+    distance: 30,
+    gender: "default",
     zipCodeReducer: {
       results: props.zipCodeReducer.results
     }
@@ -52,8 +56,14 @@ export class App extends React.Component<AppProps, AppState> {
 
   onGenderSelection = (gender: "Male" | "Female" | "default") => {
     const results = this.props.zipCodeReducer.results;
-    const filteredByGender: any = this.props.onGenderFilter(gender, results);
+    let filteredByGender: any = this.props.onGenderFilter(gender, results);
+    filteredByGender.results = filteredByGender.results.filter((result: any) => {
+      if (this.state.distance === 30) { return result; }
+      const resultDistance = Math.ceil(result.locations[0].distance);
+      return (resultDistance < this.state.distance) ? result : '';
+    });
     this.setState({
+      gender: filteredByGender.gender,
       zipCodeReducer: {
         results: filteredByGender.results
       }
@@ -61,11 +71,14 @@ export class App extends React.Component<AppProps, AppState> {
   };
 
   onDistanceSelection = (distance: number) => {
-    console.log(`Distance filter: ${distance}`);
     const results = this.props.zipCodeReducer.results;
-    const filteredByDistance: any = this.props.onDistanceFilter(distance, results);
-    console.log(filteredByDistance);
+    let filteredByDistance: any = this.props.onDistanceFilter(distance, results);
+    filteredByDistance.results = filteredByDistance.results.filter((result: any) => {
+      if (this.state.gender === 'default') { return result; }
+      return (result.gender === this.state.gender) ? result : '';
+    });
     this.setState({
+      distance: filteredByDistance.distance,
       zipCodeReducer: {
         results: filteredByDistance.results
       }

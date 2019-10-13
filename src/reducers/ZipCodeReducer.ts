@@ -15,7 +15,6 @@ export default function (
   action: ZipCodeActionTypes)
 {
   if (action.type === ZipCodeActionKeys.ZIP_CODE_SEARCH) {
-    console.log('ZIP_CODE_SEARCH');
     if ( state.results === null ) { state.results = [] }
     for (let i = 0; i < Doctors.results.length; i++) {
       // @ts-ignore
