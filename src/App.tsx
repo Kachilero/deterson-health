@@ -74,6 +74,7 @@ export class App extends React.Component<AppProps, AppState> {
                     <h3>Please enter a zip code in the field above</h3>
                   </div>
                 : <DoctorList
+                  //@ts-ignore
                     results={this.props.zipCodeReducer.results}
                   />
               }
