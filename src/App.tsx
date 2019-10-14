@@ -58,6 +58,8 @@ export class App extends React.Component<AppProps, AppState> {
   onGenderSelection = (gender: "Male" | "Female" | "default") => {
     const results = this.props.zipCodeReducer.results;
     let filteredByGender: any = this.props.onGenderFilter(gender, results);
+    // if we get null we simply return
+    if ( filteredByGender.results === null ) return;
     filteredByGender.results = filteredByGender.results.filter((result: any) => {
       if (this.state.distance === 30) { return result; }
       const resultDistance = Math.ceil(result.locations[0].distance);
@@ -74,6 +76,8 @@ export class App extends React.Component<AppProps, AppState> {
   onDistanceSelection = (distance: number) => {
     const results = this.props.zipCodeReducer.results;
     let filteredByDistance: any = this.props.onDistanceFilter(distance, results);
+    // if We get a null we simply return
+    if ( filteredByDistance.results === null ) return;
     filteredByDistance.results = filteredByDistance.results.filter((result: any) => {
       if (this.state.gender === 'default') { return result; }
       return (result.gender === this.state.gender) ? result : '';
@@ -86,11 +90,7 @@ export class App extends React.Component<AppProps, AppState> {
     })
   };
 
-  render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-    // console.log("APP STATE: ");
-    // console.log(this.state);
-    // console.log("APP PROPS: ");
-    // console.log(this.props);
+  render(): React.ReactElement<any, string | React.JSXElementConstructor<any>>  {
     return (
       <div className="App">
         <Header/>

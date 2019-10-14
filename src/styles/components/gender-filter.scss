@@ -1,9 +1,13 @@
 // Gender radio buttons
 .gender-filter {
-  margin-top: 4rem;
 
   .input-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+
+    @include breakpoint(sm) {
+      flex-direction: column;
+    }
   }
 }

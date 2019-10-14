@@ -1,8 +1,14 @@
 // Styles for the main list container only
 .result-list {
   width: 100%;
+
   h2 {
     font-size: 1.5rem;
     color: $gray2;
+    text-align: center;
+
+    @include breakpoint(sm) {
+      text-align: left;
+    }
   }
 }

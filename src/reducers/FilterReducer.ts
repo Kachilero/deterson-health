@@ -14,6 +14,7 @@ export default function (
 ) {
   switch (action.type) {
     case FilterActionKeys.DISTANCE:
+      if ( action.results === null ) { return { ...state } }
       action.results = action.results.filter((results: any) => {
         if (action.distance === 30) { return action.results }
         const resultDistance = Math.ceil(results.locations[0].distance);
@@ -24,6 +25,7 @@ export default function (
         ...state
       };
     case FilterActionKeys.GENDER:
+      if ( action.results === null ) { return { ...state } }
       action.results = action.results.filter((results: any) => {
         if (action.gender === "default") {
           return action.results

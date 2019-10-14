@@ -1,6 +1,26 @@
 // Slider
 .slider {
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @include breakpoint(sm) {
+    padding: 0;
+  }
+
+  h3 {
+    margin-block-start: 0.5rem;
+
+    @include breakpoint(sm) {
+      margin-block-start: 1rem;
+    }
+  }
+
   .rangeslider-horizontal {
+    .rangeslider__fill {
+      background-color: transparent;
+      border-radius: 0;
+    }
+
     .rangeslider__handle {
       width: 10px;
       height: 30px;
@@ -12,9 +32,22 @@
         display: none;
       }
     }
+
+    .rangeslider__label-item {
+      top: 0;
+
+      @include breakpoint(sm) {
+        top: 10px;
+      }
+    }
   }
 
   .distance-text {
     margin-top: 4rem;
+    text-align: center;
+
+    @include breakpoint(sm) {
+      text-align: left;
+    }
   }
 }

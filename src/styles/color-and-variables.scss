@@ -5,3 +5,23 @@ $gray1: #EBEBEB;
 $gray2: #9E9E9E;
 $gray3: #BDBDBD;
 $button-green: #66BB6A;
+
+// breakpoints
+$break-sm: 768px;
+$break-md: 1025px;
+$break-lg: 1250px;
+
+@mixin breakpoint($point) {
+  @if $point == xs {
+    @media (min-width: 480px ) { @content ; }
+  }
+  @else if $point == sm {
+    @media (min-width: 768px) { @content ; }
+  }
+  @else if $point == md {
+    @media (min-width: 1025px) { @content ; }
+  }
+  @else if $point == lg {
+    @media (min-width: 1250px) { @content ; }
+  }
+}
