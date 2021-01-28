@@ -9,7 +9,7 @@
     "@types/react-dom": "16.9.1",
     "@types/react-rangeslider": "^2.2.1",
     "@types/react-redux": "^7.1.4",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
